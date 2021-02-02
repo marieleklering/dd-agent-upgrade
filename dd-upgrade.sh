@@ -1,6 +1,6 @@
 #/bin/bash
 cd /tmp
-apikey=$(aws ssm get-parameter --name {{ apikey }} --with-decryption --region {{ region }} --query \"Parameter.Value\")
+apikey=$(aws ssm get-parameter --name daik-nonprod-datadog-apikey --with-decryption --region ap-southeast-2 --query \"Parameter.Value\")
 if [ $? -ne 0 ]; then
 echo 'ERROR! Unable to retrieve the API Key from the Parameter Store, exiting.'
 exit 8
