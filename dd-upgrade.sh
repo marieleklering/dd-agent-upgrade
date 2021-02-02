@@ -1,3 +1,4 @@
+#/bin/bash
 cd /tmp
 apikey=$(aws ssm get-parameter --name {{ apikey }} --with-decryption --region {{ region }} --query \"Parameter.Value\")
 if [ $? -ne 0 ]; then
@@ -44,3 +45,4 @@ fi
 else
 echo 'WARNING! Datadog agent not installed.'
 fi"
+exit
