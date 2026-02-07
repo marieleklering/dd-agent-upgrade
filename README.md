@@ -13,3 +13,34 @@ Automated, cross-platform scripts for upgrading the Datadog Agent across a fleet
 
 ---
 
+
+## How It Works
+
+### Linux — `dd-upgrade.sh`
+
+```
+Retrieve API key from SSM Parameter Store
+        │
+        ▼
+Is Datadog Agent already installed?
+        │
+   No ──┤──── Yes
+   │         │
+   │         ▼
+   │    Detect platform (suse / amazon)
+   │         │
+   │         ▼
+   │    Run Datadog install_script.sh
+   │    (DD_AGENT_MAJOR_VERSION={{ version }})
+   │         │
+   │         ▼
+   │    Compare pre/post version
+   │    ├─ Same    → "Upgrade not required"
+   │    └─ Changed → "Upgraded to <version>"
+   │         │
+   │         ▼
+   │    Rotate install logs (keep last 10)
+   │
+   ▼
+ Warn & exit
+```
